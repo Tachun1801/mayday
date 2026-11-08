@@ -1,111 +1,59 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+* { box-sizing: border-box; }
+:root { font-family: system-ui, sans-serif; color: #173b42; background: #f3f7f7; font-synthesis: none; line-height: 1.6; }
+body { margin: 0; min-width: 320px; }
+h1 { font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.25; }
+h2 { font-size: 1.25rem; }
+section { background: white; border: 1px solid #d7e4e2; border-radius: 12px; padding: clamp(1rem, 3vw, 2rem); }
+button, input, select, textarea { font: inherit; }
+button { background: #17665b; color: white; border: 1px solid #17665b; border-radius: 6px; padding: .55rem 1rem; cursor: pointer; }
+button:disabled { opacity: .55; cursor: default; }
+button.secondary { color: #17665b; background: white; }
+a { color: #17665b; }
+input, select, textarea { border: 1px solid #809b98; border-radius: 6px; padding: .6rem; width: 100%; }
+textarea { resize: vertical; }
+fieldset { min-width: 0; border: 1px solid #d7e4e2; border-radius: 8px; padding: 1rem; margin: .5rem 0; }
+fieldset > label, fieldset > fieldset { margin-bottom: 1rem; }
+legend { font-weight: 650; padding: 0 .4rem; }
+label { display: block; font-weight: 600; }
+:focus-visible { outline: 3px solid #a66a00; outline-offset: 3px; }
+.workspace { display: grid; grid-template-columns: 240px minmax(0, 1fr); min-height: 100vh; }
+aside { padding: 2rem 1.25rem; background: #e5efed; }
+aside nav { display: grid; gap: .5rem; margin: 1.5rem 0; }
+aside nav a { padding: .5rem .7rem; text-decoration: none; border-radius: 6px; }
+aside nav a.active { background: #17665b; color: white; }
+aside small { display: block; margin-top: 1rem; }
+.brand { font-size: 1.6rem; font-weight: 750; text-decoration: none; }
+main { min-width: 0; padding: 2rem; }
+.login, .standalone { max-width: 700px; margin: 3rem auto; }
+.login form { display: grid; gap: .8rem; }
+.eyebrow { color: #17665b; font-weight: 700; }
+.error { color: #8c2222; background: #fff1f0; padding: .8rem; border-radius: 6px; }
+.details { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; }
+.details dt { color: #496260; font-size: .9rem; }
+.details dd { margin: .2rem 0 0; overflow-wrap: anywhere; }
+.data-block { margin-top: 1.5rem; }
+.table-scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+th, td { text-align: left; border-bottom: 1px solid #d7e4e2; padding: .75rem; vertical-align: top; }
+th { background: #f3f7f7; white-space: nowrap; }
+.pagination { display: flex; align-items: center; justify-content: flex-end; gap: .8rem; flex-wrap: wrap; margin-top: 1rem; }
+.search { display: flex; align-items: end; gap: .7rem; margin-bottom: 1rem; }
+.search label { flex: 1; max-width: 420px; }
+.sr-only, .skip-link:not(:focus) { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.skip-link:focus { position: fixed; top: .5rem; left: .5rem; z-index: 10; background: white; padding: .5rem; }
+@media (max-width: 760px) { .workspace { grid-template-columns: 1fr; } aside { padding: 1rem; } aside nav { display: flex; flex-wrap: wrap; margin: 1rem 0; } main { padding: 1rem; } .login { margin: 1rem auto; } }
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-body {
-  margin: 0;
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
-}
+.intake-form { display: grid; gap: 1rem; max-width: 680px; }
+.clinical-detail { padding: .5rem 1rem; background: #f8fbfa; overflow-wrap: anywhere; }
+summary { cursor: pointer; color: #17665b; padding: .5rem; font-weight: 600; }
+.details dd { white-space: pre-wrap; }
+.record-workflow { border: 1px solid #d7e4e2; border-radius: 8px; padding: 1rem; margin: 1.5rem 0; }
+.record-workflow button + button { margin-left: .75rem; }
+.private-image { display: block; max-width: 100%; max-height: 70vh; object-fit: contain; margin: 1rem 0; }
+.patient-workspace aside { background: #e4f1ec; }
+.portal-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; margin: 2rem 0; }
+.portal-cards > a { color: inherit; text-decoration: none; border: 1px solid #c4ddd3; border-radius: 12px; padding: 1.25rem; background: #f5faf7; }
+.portal-cards > a:hover { border-color: #17665b; background: #edf7f0; }
+.portal-cards h2 { margin-top: 0; }
+.portal-cards span { color: #17665b; font-weight: 650; }
+.patient-workspace section > section { margin-top: 1.5rem; }

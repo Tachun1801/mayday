@@ -1,16 +1,16 @@
-# React + Vite
+# Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React 19/Vite/JSX, React Router và Axios; Node.js 24+. Web gồm staff/admin và patient portal, chỉ gọi HTTP API, không truy cập PostgreSQL.
 
-Currently, two official plugins are available:
+## Chạy và kiểm tra
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Từ frontend: `npm ci`, `npm run dev` (mặc định `127.0.0.1:5173`). Kiểm tra: `npm test`, `npm run lint`, `npm run build`; `npm run preview` xem build.
 
-## React Compiler
+[.env.example](.env.example) chỉ chứa cấu hình public. `VITE_API_BASE_URL` mặc định `/`; client thêm `/api/v1` một lần, health gọi `/health`. Vite proxy backend local; production cần HTTPS reverse proxy và SPA fallback theo [runbook](../doc/production-runbook.md). Không đặt secrets trong biến VITE.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [src/](src/README.md): app/features/shared và assets.
+- [tests/](tests/README.md): unit/render tests bằng Node.
+- [scripts/](scripts/README.md): browser opt-in CAP/MAN/PATIENT với API tổng hợp.
+- [public/](public/README.md): static assets public.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Shared `/login`, `/register`; staff làm việc ở `/patients`, `/medical-records`, `/admin`; patient ở `/portal`. Token chỉ trong memory, backend quyết định quyền. Sau mutation không rõ outcome phải đọc lại trước retry. [Báo cáo chức năng](../doc/project-report.md), [contract](../doc/current-api.md); chưa nghiệm thu production/DB/provider thật.
